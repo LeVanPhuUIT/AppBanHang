@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 
 import Collection from './Collection';
 import Category from './Category';
+
 class Home extends Component {
     render() {
         return (
