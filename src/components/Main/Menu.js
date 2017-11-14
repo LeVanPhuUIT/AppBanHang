@@ -12,6 +12,7 @@ class Menu extends Component {
   }
   gotoOrderHistory() {
     const { navigator } = this.props;
+    
     navigator.push({ name: 'ORDER_HISTORY' });
   }
   render() {
