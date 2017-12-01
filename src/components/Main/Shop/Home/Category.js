@@ -24,8 +24,10 @@ export default class Category extends Component {
               <Text style={textStyle}> SPRING COLLECTION</Text>
             </View>
             <View style={{ flex: 4 }}>
-              <Swiper >
-                <Image source={littleIcon} style={imageStyle} />
+              <Swiper showsPagination width={imageWidth} height={imageHeight}>
+                <Image source={littleIcon} style={imageStyle} >
+                    <Text> aaaaa </Text>
+                </Image>
                 <Image source={maxiIcon} style={imageStyle} />
                 <Image source={partyIcon} style={imageStyle} />
               </Swiper>

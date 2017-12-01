@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 
-import Home from './Home/home';
+import Home from './Home/Home';
 import Contact from './Contact/Contact';
 import Cart from './Car/Cart';
 import Search from './Search/Search';
