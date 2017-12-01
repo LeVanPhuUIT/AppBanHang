@@ -6,7 +6,7 @@ import profileIcon from '../../media/temp/profile1.png';
 class Menu extends Component {
   constructor(props) {
       super(props);
-      this.state = { isLogedIn: true };
+      this.state = { isLogedIn: false };
   }
   gotoAuthentication() {
     const { navigator } = this.props;
@@ -29,7 +29,7 @@ class Menu extends Component {
         } = styles;
     const logoutJSX = (
         <View>
-          <TouchableOpacity style={btnStyle}>
+          <TouchableOpacity style={btnStyle} onPress={this.gotoAuthentication.bind(this)}>
             <Text style={btnText}>Sign In</Text>
           </TouchableOpacity>
         </View>
@@ -38,13 +38,13 @@ class Menu extends Component {
       <View style={loginContainer}>
           <Text style={username}> PHU</Text>
           <View>
-            <TouchableOpacity style={btnSignInStyle}>
+            <TouchableOpacity style={btnSignInStyle} onPress={this.gotoOrderHistory.bind(this)}>
               <Text style={btnTextSignIn}>Order Histrory</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={btnSignInStyle}>
+            <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
               <Text style={btnTextSignIn}>Change Info</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={btnSignInStyle}>
+            <TouchableOpacity style={btnSignInStyle} >
               <Text style={btnTextSignIn}>Sign Out</Text>
             </TouchableOpacity>
           </View>
@@ -53,10 +53,12 @@ class Menu extends Component {
     );
     
     const mainJJSX = this.state.isLogedIn ? loginJSX : logoutJSX;
-    return <View style={container}>
+    return (
+      <View style={container}>
         <Image source={profileIcon} style={profile} />
         { mainJJSX}
-      </View>;
+      </View>
+      );
   }
 }
 
