@@ -13,7 +13,8 @@ const { width } = Dimensions.get('window');
 
 export default class Collection extends Component {
     gotoListProduct() {
-
+        const { navigator } = this.props;
+        navigator.push({ name: 'LIST_PRODUCT' });
     }
     render() {
         const { wrapper, textStyle, imageStyle } = styles;
