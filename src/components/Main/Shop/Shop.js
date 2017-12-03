@@ -4,7 +4,7 @@ import TabNavigator from 'react-native-tab-navigator';
 
 import Home from './Home/Home';
 import Contact from './Contact/Contact';
-import Cart from './Car/Cart';
+import Cart from './Cart/Cart';
 import Search from './Search/Search';
 import Header from './Header';
 
