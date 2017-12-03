@@ -1,0 +1,16 @@
+const checkLogin = (token) => (
+    //fetch('https://phulv.me/check_login.php',
+    //fetch('https://phulv.000webhostapp.com/check_login.php',
+    fetch('http://192.168.0.103:8082/MyShop/check_login.php',
+    {   
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify({ token })
+    })
+    .then(res => res.json())
+);
+
+module.exports = checkLogin;
