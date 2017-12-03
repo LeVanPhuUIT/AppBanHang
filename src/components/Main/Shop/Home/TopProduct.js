@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 
 import sp1 from '../../../../media/temp/sp1.jpeg';
 import sp2 from '../../../../media/temp/sp2.jpeg';
@@ -7,6 +7,10 @@ import sp3 from '../../../../media/temp/sp3.jpeg';
 import sp4 from '../../../../media/temp/sp4.jpeg';
 
 export default class TopProduct extends Component {
+  gotoProductDetail() {
+    const { navigator } = this.props;
+    navigator.push({ name: 'PRODUCT_DETAIL' });
+  }
   render() {
     const {
       container,
@@ -25,23 +29,23 @@ export default class TopProduct extends Component {
           <Text style={title}>TOP PRODUCT</Text>
         </View>
         <View style={body} >
-            <View style={productContainer}>
+            <TouchableOpacity onPress={this.gotoProductDetail.bind(this)} style={productContainer}>
                 <Image source={sp1} style={productImage} />
+                <Text style={produceName}>Tên Sản Phẩm</Text>
+                <Text style={producePrice}>Giá Sản Phẩm</Text>
+            </TouchableOpacity>
+            <View style={productContainer}>
+                <Image source={sp2} style={productImage} />
                 <Text style={produceName}>Tên Sản Phẩm</Text>
                 <Text style={producePrice}>Giá Sản Phẩm</Text>
             </View>
             <View style={productContainer}>
-                <Image source={sp1} style={productImage} />
+                <Image source={sp3} style={productImage} />
                 <Text style={produceName}>Tên Sản Phẩm</Text>
                 <Text style={producePrice}>Giá Sản Phẩm</Text>
             </View>
             <View style={productContainer}>
-                <Image source={sp1} style={productImage} />
-                <Text style={produceName}>Tên Sản Phẩm</Text>
-                <Text style={producePrice}>Giá Sản Phẩm</Text>
-            </View>
-            <View style={productContainer}>
-                <Image source={sp1} style={productImage} />
+                <Image source={sp4} style={productImage} />
                 <Text style={produceName}>Tên Sản Phẩm</Text>
                 <Text style={producePrice}>Giá Sản Phẩm</Text>
             </View>
