@@ -9,11 +9,20 @@ import {
   ScrollView
 } from 'react-native';
 import backSpecial from '../../media/appIcon/backs.png';
+import getOrderHistory from '../../api/getOrderHistory';
+import getToken from '../../api/getToken';
 
 export default class OrderHistory extends Component {
   constructor(props) {
     super(props);
     this.state = { arrOrder: [] };
+  }
+
+  componentDidMount() {
+    getToken()
+      .then(token => getOrderHistory(token))
+      .then(arrOrder => this.setState({ arrOrder }))
+      .catch(err => console.log(err));
   }
 
   goBackToMain() {
@@ -40,8 +49,8 @@ export default class OrderHistory extends Component {
         </View>
         <View style={body}>
           <ScrollView>
-            
-              <View style={orderRow}>
+            {this.state.arrOrder.map(e => (
+              <View style={orderRow} key={e.id}>
                 <View
                   style={{
                     flexDirection: 'row',
@@ -51,7 +60,7 @@ export default class OrderHistory extends Component {
                   <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>
                     Order id:
                   </Text>
-                  <Text style={{ color: '#2ABB9C' }}>ORD001</Text>
+                  <Text style={{ color: '#2ABB9C' }}>ORD{e.id}</Text>
                 </View>
                 <View
                   style={{
@@ -62,7 +71,7 @@ export default class OrderHistory extends Component {
                   <Text style={{ color: '#9A9A9A', fontWeight: 'bold' }}>
                     OrderTime:
                   </Text>
-                  <Text style={{ color: '#C21C70' }}>TIME</Text>
+                  <Text style={{ color: '#C21C70' }}>{e.date_order}</Text>
                 </View>
                 <View
                   style={{
@@ -74,7 +83,7 @@ export default class OrderHistory extends Component {
                     Status:
                   </Text>
                   <Text style={{ color: '#2ABB9C' }}>
-                    'Completed'
+                    {e.status ? 'Completed' : 'Pending'}
                   </Text>
                 </View>
                 <View
@@ -87,11 +96,11 @@ export default class OrderHistory extends Component {
                     Total:
                   </Text>
                   <Text style={{ color: '#C21C70', fontWeight: 'bold' }}>
-                    100$
+                    {e.total}$
                   </Text>
                 </View>
               </View>
-        
+            ))}
           </ScrollView>
         </View>
       </View>
