@@ -1,6 +1,6 @@
 const register = (email, name, password) => (
     //fetch('https://phulv.me/register.php',
-    fetch('https://phulv.000webhostapp.com/register.php',
+    fetch('http://192.168.0.103:8082/MyShop/register.php',
     {   
         method: 'POST',
         headers: {
