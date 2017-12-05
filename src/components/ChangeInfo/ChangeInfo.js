@@ -12,11 +12,13 @@ import backSpecial from '../../media/appIcon/backs.png';
 export default class ChangeInfo extends Component {
   constructor(props) {
     super(props);
+    const { name, address, phone } = props.user;
     this.state = {
-      txtName: 'name',
-      txtAddress: 'address',
-      txtPhone: 'phone'
+      txtName: name,
+      txtAddress: address,
+      txtPhone: phone
     };
+    console.log(props.user);
   }
   goBackToMain() {
     const { navigator } = this.props;
