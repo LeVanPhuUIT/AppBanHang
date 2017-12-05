@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  ListView
+} from 'react-native';
 
-import sp1 from '../../../../media/temp/sp1.jpeg';
-import sp2 from '../../../../media/temp/sp2.jpeg';
-import sp3 from '../../../../media/temp/sp3.jpeg';
-import sp4 from '../../../../media/temp/sp4.jpeg';
+//const url = 'https://phulv.me/images/product/';
+//const url = 'https://phulv.000webhostapp.com/images/product/';
+const url = 'http://192.168.0.103:8082/MyShop/images/product/';
 
 export default class TopProduct extends Component {
-  gotoProductDetail() {
+  gotoDetail(product) {
     const { navigator } = this.props;
-    navigator.push({ name: 'PRODUCT_DETAIL' });
+    navigator.push({ name: 'PRODUCT_DETAIL', product });
   }
   render() {
     const {
@@ -28,28 +35,31 @@ export default class TopProduct extends Component {
         <View style={titleContainer}>
           <Text style={title}>TOP PRODUCT</Text>
         </View>
-        <View style={body} >
-            <TouchableOpacity onPress={this.gotoProductDetail.bind(this)} style={productContainer}>
-                <Image source={sp1} style={productImage} />
-                <Text style={produceName}>Tên Sản Phẩm</Text>
-                <Text style={producePrice}>Giá Sản Phẩm</Text>
+
+        <ListView
+          contentContainerStyle={body}
+          enableEmptySections
+          dataSource={new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 !== r2
+          }).cloneWithRows(topProducts)}
+          renderRow={product => (
+            <TouchableOpacity
+              style={productContainer}
+              onPress={() => this.gotoDetail(product)}
+            >
+              <Image
+                source={{ uri: `${url}${product.images[0]}` }}
+                style={productImage}
+              />
+              <Text style={produceName}>{product.name.toUpperCase()}</Text>
+              <Text style={producePrice}>{product.price}$</Text>
             </TouchableOpacity>
-            <View style={productContainer}>
-                <Image source={sp2} style={productImage} />
-                <Text style={produceName}>Tên Sản Phẩm</Text>
-                <Text style={producePrice}>Giá Sản Phẩm</Text>
-            </View>
-            <View style={productContainer}>
-                <Image source={sp3} style={productImage} />
-                <Text style={produceName}>Tên Sản Phẩm</Text>
-                <Text style={producePrice}>Giá Sản Phẩm</Text>
-            </View>
-            <View style={productContainer}>
-                <Image source={sp4} style={productImage} />
-                <Text style={produceName}>Tên Sản Phẩm</Text>
-                <Text style={producePrice}>Giá Sản Phẩm</Text>
-            </View>
-        </View>
+          )}
+          renderSeparator={(sectionId, rowId) => {
+            if (rowId % 2 === 1) return <View style={{ width, height: 10 }} />;
+            return null;
+          }}
+        />
       </View>
     );
   }
@@ -57,7 +67,7 @@ export default class TopProduct extends Component {
 
 const { width } = Dimensions.get('window');
 const produtWidth = (width - 60) / 2;
-const productImageHeight = produtWidth / 361 * 452;
+const productImageHeight = (produtWidth / 361) * 452;
 
 const styles = StyleSheet.create({
   container: {
@@ -79,7 +89,7 @@ const styles = StyleSheet.create({
   body: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    flexWrap: 'wrap', // cho san pham vua kich thuoc man hinh thi xuong dong
+    flexWrap: 'wrap',
     paddingBottom: 10
   },
   productContainer: {
