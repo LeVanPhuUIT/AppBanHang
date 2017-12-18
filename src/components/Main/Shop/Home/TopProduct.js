@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 //const url = 'https://phulv.me/images/product/';
-//const url = 'https://phulv.000webhostapp.com/images/product/';
+//const url = 'https://192.168.0.103:8082/MyShop/images/product/';
 const url = 'http://192.168.0.103:8082/MyShop/images/product/';
 
 export default class TopProduct extends Component {
