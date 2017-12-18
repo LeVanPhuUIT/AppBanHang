@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 import icBack from '../../media/appIcon/back_white.png';
 import icLogo from '../../media/appIcon/ic_logo.png';
@@ -42,7 +42,6 @@ export default class Authentication extends Component {
     } = styles;
 
     const { isSignIn } = this.state;
-
     const mainJSX = isSignIn ? (
       <SignIn goBackToMain={this.goBackToMain.bind(this)} />
     ) : (
@@ -54,7 +53,7 @@ export default class Authentication extends Component {
           <TouchableOpacity onPress={this.goBackToMain.bind(this)}>
             <Image source={icBack} style={iconStyle} />
           </TouchableOpacity>
-          <Text style={titleStyle}>MY SHOP</Text>
+          <Text style={titleStyle}>Wearing a Dress</Text>
           <Image source={icLogo} style={iconStyle} />
         </View>
         {mainJSX}
