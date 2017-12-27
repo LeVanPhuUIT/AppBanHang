@@ -12,7 +12,7 @@ import global from '../../../global';
 
 ///const url = 'http://localhost/api/images/product/';
 //const url = 'https://phulv.me/images/product/';
-const url = 'http://192.168.0.103:8082/MyShop/images/product/';
+const url = 'http://192.168.1.5:8082/MyShop/images/product/';
 
 function toTitleCase(str) {
   return str.replace(

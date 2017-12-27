@@ -6,11 +6,14 @@ import {
   ListView,
   Dimensions,
   StyleSheet,
-  Image
+  Image,
+  Alert
 } from 'react-native';
 import global from '../../../global';
+import renderIf from '../../../renderIf';
 import sendOrder from '../../../../api/sendOrder';
 import getToken from '../../../../api/getToken';
+import getCart from '../../../../api/getCart';
 
 function toTitleCase(str) {
   return str.replace(
@@ -19,7 +22,8 @@ function toTitleCase(str) {
   );
 }
 
-const url = '192.168.0.103:8082/MyShop/images/product/';
+//const url = 'https://phulv.000webhostapp.com/images/product/';
+const url = 'http://192.168.1.5:8082/MyShop/images/product/';
 
 class CartView extends Component {
   async onSendOrder() {
@@ -39,7 +43,6 @@ class CartView extends Component {
       console.log(e);
     }
   }
-
   incrQuantity(id) {
     global.incrQuantity(id);
   }
@@ -47,7 +50,16 @@ class CartView extends Component {
     global.decrQuantity(id);
   }
   removeProduct(id) {
-    global.removeProduct(id);
+    Alert.alert(
+      'Caution',
+      'Do you want to delete this product?',
+      [
+        { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+        { text: 'OK', onPress: () => { console.log('OK Pressed'); global.removeProduct(id); } },
+      ],
+      { cancelable: false }
+    );
+    
   }
   gotoDetail(product) {
     const { navigator } = this.props;
@@ -100,7 +112,7 @@ class CartView extends Component {
                   <TouchableOpacity
                     onPress={() => this.removeProduct(cartItem.product.id)}
                   >
-                    <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>
+                    <Text style={{ fontFamily: 'Avenir', color: '#969696', fontSize: 20 }}>
                       X
                     </Text>
                   </TouchableOpacity>
@@ -113,13 +125,13 @@ class CartView extends Component {
                     <TouchableOpacity
                       onPress={() => this.incrQuantity(cartItem.product.id)}
                     >
-                      <Text>+</Text>
+                      <Text style={{ fontSize: 20 }} >+</Text>
                     </TouchableOpacity>
-                    <Text>{cartItem.quantity}</Text>
+                    <Text style={{ fontSize: 20 }}>{cartItem.quantity}</Text>
                     <TouchableOpacity
                       onPress={() => this.decrQuantity(cartItem.product.id)}
                     >
-                      <Text>-</Text>
+                      <Text style={{ fontSize: 20 }}>--</Text>
                     </TouchableOpacity>
                   </View>
                   <TouchableOpacity
@@ -139,6 +151,17 @@ class CartView extends Component {
         >
           <Text style={checkoutTitle}>TOTAL {total}$ CHECKOUT NOW</Text>
         </TouchableOpacity>
+        {/* {renderIf(!getCart, <TouchableOpacity
+          style={checkoutButton}
+          onPress={this.onSendOrder.bind(this)}
+        >
+          <Text style={checkoutTitle}>TOTAL {total}$ CHECKOUT NOW</Text>
+        </TouchableOpacity>)}
+
+        {renderIf(getCart,
+          <Text style={checkoutTitle}>NOTHING CHECKOUT NOW</Text>
+        )} */}
+
       </View>
     );
   }
@@ -146,7 +169,7 @@ class CartView extends Component {
 
 const { width } = Dimensions.get('window');
 const imageWidth = width / 4;
-const imageHeight = (imageWidth * 452) / 361;
+const imageHeight = imageWidth * 452 / 361;
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -216,7 +239,7 @@ const styles = StyleSheet.create({
   },
   txtShowDetail: {
     color: '#C21C70',
-    fontSize: 10,
+    fontSize: 13,
     fontWeight: '400',
     fontFamily: 'Avenir',
     textAlign: 'right'

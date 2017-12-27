@@ -13,7 +13,7 @@ import global from '../../../global';
 const back = require('../../../../media/appIcon/back.png');
 const cart = require('../../../../media/appIcon/cartfull.png');
 
-const url = 'http://192.168.0.103:8082/MyShop/images/product/';
+const url = 'http://192.168.1.5:8082/MyShop/images/product/';
 //const url = 'https://phulv.me/images/product/';
 
 export default class ProductDetail extends Component {

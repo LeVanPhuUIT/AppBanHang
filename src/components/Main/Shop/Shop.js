@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Alert } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import Header from './Header';
 import Home from './Home/Home';
@@ -69,7 +69,21 @@ class Shop extends Component {
   decrQuantity(productId) {
     const newCart = this.state.cartArray.map(e => {
       if (e.product.id !== productId) return e;
-      return { product: e.product, quantity: e.quantity - 1 };
+      const conLai = e.quantity - 1;
+      if (conLai === 0) {
+        Alert.alert(
+          'Caution',
+          'Do you want to delete this product?',
+          [
+            { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+            { text: 'OK', onPress: () => { console.log('OK Pressed'); this.removeProduct(e.product.id); } },
+          ],
+          { cancelable: false }
+        );
+      } else {
+        return { product: e.product, quantity: e.quantity - 1 };
+      }
+      return e;
     });
     this.setState({ cartArray: newCart }, () => saveCart(this.state.cartArray));
   }

@@ -2,7 +2,7 @@ const sendOrder = (token, arrayDetail) => {
     const data = { token, arrayDetail };
     console.log(data);
     //return fetch('https://phulv.me/cart.php',
-    return fetch('http://192.168.0.103:8082/MyShop/cart.php',
+    return fetch('http://192.168.1.5:8082/MyShop/cart.php',
     {   
         method: 'POST',
         headers: {

@@ -3,7 +3,7 @@ import getToken from './getToken';
 
 const getNewToken = (token) => (
     //fetch('https://phulv.me/refresh_token.php',
-    fetch('http://192.168.0.103:8082/MyShop/refresh_token.php',
+    fetch('http://192.168.1.5:8082/MyShop/refresh_token.php',
     {   
         method: 'POST',
         headers: {

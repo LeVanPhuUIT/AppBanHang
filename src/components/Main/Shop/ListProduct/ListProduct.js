@@ -12,7 +12,7 @@ import getListProduct from '../../../../api/getListProduct';
 
 import backList from '../../../../media/appIcon/backList.png';
 
-const url = 'http://192.168.0.103:8082/MyShop/images/product/';
+const url = 'http://192.168.1.5:8082/MyShop/images/product/';
 function toTitleCase(str) {
   return str.replace(
     /\w\S*/g,

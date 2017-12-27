@@ -11,7 +11,7 @@ import Swiper from 'react-native-swiper';
 
 const { width } = Dimensions.get('window');
 //const url = 'https://27.72.192.103/images/type/';
-const url = 'http://192.168.0.103:8082/MyShop/images/type/';
+const url = 'http://192.168.1.5:8082/MyShop/images/type/';
 
 export default class Category extends Component {
   gotoListProduct(category) {
