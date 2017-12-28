@@ -23,7 +23,7 @@ export default class SignIn extends Component {
   }
 
   //SAI_THONG_TIN_DANG_NHAP
-    onFail() {
+  onFail() {
     Alert.alert(
       'Notice',
       'Email or Password is incorrect',
@@ -41,7 +41,7 @@ export default class SignIn extends Component {
         this.props.goBackToMain();
         saveToken(res.token);
       })
-      .catch(err => console.log(err));
+      .catch(err => { console.log(err); this.onFail(); });
   }
 
   render() {
