@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import {
-  View,
-  TouchableOpacity,
-  Text,
-  Image,
-  StyleSheet,
-  TextInput
+  View, TouchableOpacity, Text, Image, StyleSheet, TextInput, Alert
 } from 'react-native';
 import backSpecial from '../../media/appIcon/backs.png';
+import changeInfoApi from '../../api/changeInfo';
+import getToken from '../../api/getToken';
+import global from '../global';
 
 export default class ChangeInfo extends Component {
   constructor(props) {
@@ -18,24 +16,35 @@ export default class ChangeInfo extends Component {
       txtAddress: address,
       txtPhone: phone
     };
-    console.log(props.user);
+  }
+
+  onSuccess() {
+    Alert.alert(
+      'Notice',
+      'Change infomation successfully!',
+      [{ text: 'OK', onPress: this.goBackToMain.bind(this) }],
+      { cancelable: false }
+    );
   }
   goBackToMain() {
     const { navigator } = this.props;
     navigator.pop();
   }
-
+  change() {
+    const { txtName, txtAddress, txtPhone } = this.state;
+    getToken()
+      .then(token => changeInfoApi(token, txtName, txtAddress, txtPhone))
+      .then(user => {
+        this.onSuccess();
+        global.onSignIn(user);
+      })
+      .catch(err => console.log(err));
+  }
   render() {
     const {
-      wrapper,
-      header,
-      headerTitle,
-      backIconStyle,
-      body,
-      signInContainer,
-      signInTextStyle,
-      textInput
-    } = styles;
+            wrapper, header, headerTitle, backIconStyle, body,
+      signInContainer, signInTextStyle, textInput
+        } = styles;
     const { txtName, txtAddress, txtPhone } = this.state;
     return (
       <View style={wrapper}>
@@ -52,9 +61,7 @@ export default class ChangeInfo extends Component {
             placeholder="Enter your name"
             autoCapitalize="none"
             value={txtName}
-            onChangeText={text =>
-              this.setState({ ...this.state, txtName: text })
-            }
+            onChangeText={text => this.setState({ ...this.state, txtName: text })}
             underlineColorAndroid="transparent"
           />
           <TextInput
@@ -62,9 +69,7 @@ export default class ChangeInfo extends Component {
             placeholder="Enter your address"
             autoCapitalize="none"
             value={txtAddress}
-            onChangeText={text =>
-              this.setState({ ...this.state, txtAddress: text })
-            }
+            onChangeText={text => this.setState({ ...this.state, txtAddress: text })}
             underlineColorAndroid="transparent"
           />
           <TextInput
@@ -72,12 +77,10 @@ export default class ChangeInfo extends Component {
             placeholder="Enter your phone number"
             autoCapitalize="none"
             value={txtPhone}
-            onChangeText={text =>
-              this.setState({ ...this.state, txtPhone: text })
-            }
+            onChangeText={text => this.setState({ ...this.state, txtPhone: text })}
             underlineColorAndroid="transparent"
           />
-          <TouchableOpacity style={signInContainer}>
+          <TouchableOpacity style={signInContainer} onPress={this.change.bind(this)}>
             <Text style={signInTextStyle}>CHANGE YOUR INFOMATION</Text>
           </TouchableOpacity>
         </View>
@@ -88,14 +91,7 @@ export default class ChangeInfo extends Component {
 
 const styles = StyleSheet.create({
   wrapper: { flex: 1, backgroundColor: '#fff' },
-  header: {
-    flex: 1,
-    backgroundColor: '#2ABB9C',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    paddingHorizontal: 10
-  }, // eslint-disable-line
+  header: { flex: 1, backgroundColor: '#2ABB9C', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', paddingHorizontal: 10 },// eslint-disable-line
   headerTitle: { fontFamily: 'Avenir', color: '#fff', fontSize: 20 },
   backIconStyle: { width: 30, height: 30 },
   body: { flex: 10, backgroundColor: '#F6F6F6', justifyContent: 'center' },
@@ -111,10 +107,7 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
   signInTextStyle: {
-    color: '#FFF',
-    fontFamily: 'Avenir',
-    fontWeight: '600',
-    paddingHorizontal: 20
+    color: '#FFF', fontFamily: 'Avenir', fontWeight: '600', paddingHorizontal: 20
   },
   signInContainer: {
     marginHorizontal: 20,
