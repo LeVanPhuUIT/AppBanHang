@@ -38,16 +38,42 @@ export default class SignUp extends Component {
     );
   }
 
+  onNull() {
+    Alert.alert(
+      'Notice',
+      'Please enter all the fields',
+      [{ text: 'OK' }],
+      { cancelable: false }
+    );
+  }
+
+  onPassword() {
+    Alert.alert(
+      'Notice',
+      'Make sure the passwords match!',
+      [{ text: 'OK' }],
+      { cancelable: false }
+    );
+  }
+
   removeEmail() {
     this.setState({ email: '' });
   }
 
   registerUser() {
-    const { name, email, password } = this.state;
-    register(email, name, password).then(res => {
-      if (res === 'THANH_CONG') return this.onSuccess();
-      this.onFail();
-    });
+    const { name, email, password, rePassword } = this.state;
+    if (name && email && password && rePassword) {
+      if (password !== rePassword) {
+        this.onPassword();
+      } else {
+      register(email, name, password).then(res => {
+        if (res === 'THANH_CONG') return this.onSuccess();
+        this.onFail();
+      });
+    }
+    } else {
+      this.onNull();
+    }
   }
 
   render() {
