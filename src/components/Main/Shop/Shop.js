@@ -92,6 +92,13 @@ class Shop extends Component {
     const newCart = this.state.cartArray.filter(
       e => e.product.id !== productId
     );
+    console.log(newCart);
+    this.setState({ cartArray: newCart }, () => saveCart(this.state.cartArray));
+  }
+
+  removeAllProduct() {
+    const newCart = [];
+    console.log(newCart);
     this.setState({ cartArray: newCart }, () => saveCart(this.state.cartArray));
   }
 

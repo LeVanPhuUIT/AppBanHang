@@ -36,6 +36,7 @@ class CartView extends Component {
       const kq = await sendOrder(token, arrayDetail);
       if (kq === 'THEM_THANH_CONG') {
         console.log('THEM THANH CONG');
+        //this.removeAllProduct();
       } else {
         console.log('THEM THAT BAI', kq);
       }
@@ -59,7 +60,20 @@ class CartView extends Component {
       ],
       { cancelable: false }
     );
-    
+  }
+  removeAllProduct() {
+    Alert.alert(
+      'Success',
+      'You have bought products successfully!',
+      [
+        { text: 'OK',
+onPress: () => { 
+          console.log('OK Pressed');
+          //global.removeAllProduct(); 
+} },
+      ],
+      { cancelable: false }
+    );
   }
   gotoDetail(product) {
     const { navigator } = this.props;
@@ -148,6 +162,7 @@ class CartView extends Component {
         <TouchableOpacity
           style={checkoutButton}
           onPress={this.onSendOrder.bind(this)}
+          //onPress={() => this.removeAllProduct()}
         >
           <Text style={checkoutTitle}>TOTAL {total}$ CHECKOUT NOW</Text>
         </TouchableOpacity>
