@@ -39,7 +39,7 @@ export default class Header extends Component {
           <TouchableOpacity onPress={this.props.onOpen}>
             <Image source={icMenu} style={iconStyle} />
           </TouchableOpacity>
-          <Text style={titleStyle}>Wearing a Dress</Text>
+          <Text style={titleStyle}>My Shop</Text>
           <Image source={icLogo} style={iconStyle} />
         </View>
         <TextInput
@@ -59,7 +59,7 @@ export default class Header extends Component {
 const styles = StyleSheet.create({
   wrapper: {
     height: height / 8,
-    backgroundColor: '#34B089',
+    backgroundColor: '#336fce',
     padding: 10,
     justifyContent: 'space-around'
   },

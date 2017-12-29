@@ -92,7 +92,7 @@ class Menu extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#34B089',
+    backgroundColor: '#336fce',
     borderRightWidth: 3,
     borderColor: '#fff',
     alignItems: 'center'
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 70
   },
   btnText: {
-    color: '#34B089',
+    color: '#336fce',
     fontFamily: 'Avenir',
     fontSize: 20
   },
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   },
   btnTextSignIn: {
-    color: '#34B089',
+    color: '#336fce',
     fontSize: 15
   },
   loginContainer: {

@@ -53,7 +53,7 @@ export default class Authentication extends Component {
           <TouchableOpacity onPress={this.goBackToMain.bind(this)}>
             <Image source={icBack} style={iconStyle} />
           </TouchableOpacity>
-          <Text style={titleStyle}>Wearing a Dress</Text>
+          <Text style={titleStyle}>My Shop</Text>
           <Image source={icLogo} style={iconStyle} />
         </View>
         {mainJSX}
@@ -79,7 +79,7 @@ export default class Authentication extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3EBA77',
+    backgroundColor: '#336fce',
     padding: 20,
     justifyContent: 'space-between'
   },
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     color: '#D7D7D7'
   },
   activeStyle: {
-    color: '#3EBA77'
+    color: '#336fce'
   },
   signInStyle: {
     backgroundColor: '#fff',
